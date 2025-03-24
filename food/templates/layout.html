@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{%load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %} 
+         
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="{%static 'css/food_style.css'%}">
+    <script src="{% static 'js/script.js' %}" defer></script>
+</head>
+<body>
+    <nav>
+        <a href="/" title="🏠">Home</a> |||
+        <a href="/about" title="❤️‍🩹">About me</a> |||
+        <a href="{% url 'posts:list'%}" title="📪">posts</a> |||
+        {% if user.is_authenticated %}
+        <a href="{% url 'posts:new-post'%}" title="📪">New Post</a> 
+        <form action="{% url 'users:logout'%}"  method="post">
+            {% csrf_token %}
+            <button class="cta-button">logout button</button>
+        </form>
+        {%block username%} 
+        
+        {%endblock%}
+        {%else %}
+              <a href="/users/register" class="cta-button" title="®️">User Registration</a> |||
+        <a href="/users/login" class="cta-button" title="🥽">User Login</a>            
+        {%endif%}
+        {% comment %} {% url 'posts:list'%} which i can also use {% endcomment %}
+
+    </nav>
+    <main >
+        {% block content%}
+ 
+        {% endblock %}
+    </main>
+</body>
+</html>
