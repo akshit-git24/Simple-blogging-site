@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+ 
+{%block title%}
+ Register a new User
+{%endblock%}
+    {{post.author}}
+{% block content%}
+    <section>
+        <h1> Register a user </h1> 
+    </section>
+    <form class="form-with-validation" action="/users/register/" method="post">
+        {% csrf_token %} 
+        {{ form }}  
+        <button class="cta-button">submit</button>
+    </form>
+
+{%endblock%}
+

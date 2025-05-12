@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Posts List
+{% endblock %}
+
+{% block content %}
+    <section style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+        <h1 style="text-align: center; font-size: 2.5em; margin-bottom: 30px; color: #333;">Posts List Here</h1>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+            {% for post in posts %} {% comment %} defined in views.py {% endcomment %}
+                <article style="background: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 300px; transition: transform 0.2s ease-in-out; overflow: hidden;">
+                    <h2 style="background: linear-gradient(90deg, #3498db, #2980b9); color: #fff; margin: 0; padding: 15px; font-size: 1.6em; text-align: center; border-radius: 10px 10px 0 0; line-height: 1.2;">
+                        <a href="{% url 'posts:page' slug=post.slug %}" style="text-decoration: none; color: inherit;">
+                            {{ post.title }}
+                        </a>
+                    </h2>
+                    <h3 style="margin: 10px 10px 0 0; font-size: 1.1em; color: #7f8c8d; font-weight: normal; text-align: right; padding: 0 10px;">{{ post.author }}</h3>
+                    <div style="padding: 10px;">
+                        <p style="margin: 0 0 10px; font-size: 0.9em; color: #95a5a6;">{{ post.date }}</p>
+                        <p style="margin: 0; font-size: 1em; color: #34495e; line-height: 1.5; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;">
+                            {{ post.body }}
+                        </p>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
